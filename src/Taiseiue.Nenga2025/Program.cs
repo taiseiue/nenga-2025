@@ -1,3 +1,5 @@
+using Taiseiue.Nenga2025;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

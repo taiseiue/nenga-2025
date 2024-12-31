@@ -13,5 +13,9 @@ public class Lot
     /// <summary>
     /// 当たりくじの場合は、アマギフのUrl
     /// </summary>
-    public string GiftUrl { get; set; }
+    public string? GiftUrl { get; set; }
+    /// <summary>
+    /// 開封日
+    /// </summary>
+    public DateTime? OpenedAt { get; set; }
 }

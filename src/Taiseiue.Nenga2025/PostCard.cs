@@ -11,4 +11,8 @@ public class PostCard
     /// くじで当たりを引いている場合は、そのくじの番号
     /// </summary>
     public int? Lot { get; set; }
+    /// <summary>
+    /// 開封日
+    /// </summary>
+    public DateTime? OpenedAt { get; set; }
 }

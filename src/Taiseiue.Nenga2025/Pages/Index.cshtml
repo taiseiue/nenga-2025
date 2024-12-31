@@ -1,12 +1,12 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "";
 }
 
 <div class="text-center">
-    <h1 class="display-4">あけおめ！</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">あけましておめでとうございます</h1>
+    <p>郵便はがきの下部番号を入力して、おみくじを引こう！</p>
 </div>
 
 <form method="post" action="">
@@ -34,10 +34,33 @@
     <button type="submit" class="btn btn-primary">確認</button>
     <button type="reset" class="btn btn-secondary">リセット</button>
 </form>
-@if (Model.WasPosted)
+@if (Model.Error != null)
 {
     <hr />
-    <h2>当選情報</h2>
-    <p>組: @Model.Group 組</p>
-    <p>@Model.Number 番</p>
+    <div class="alert alert-danger" role="alert">
+    @Model.Error
+</div>
 }
+@if (Model.WasPosted && Model.PostCard != null && Model.Lot != null)
+{
+    <hr />
+    <h2>あなたのハガキ</h2>
+    <div class="container">
+    <h3>@Model.PostCard.Name 様</h3>
+    <p>B0 @Model.PostCard.Group 組 / @Model.PostCard.Number 番</p>
+    <hr />
+    <p>@Model.PostCard.Message</p>
+    <h4>おみくじ結果</h4>
+    <p>@Model.Lot.Message</p>
+    @if (Model.Lot.GiftUrl != null)
+        {
+            <a href="@Model.Lot.GiftUrl">おめでとう！あたり！ここをクリックしてね！</a>
+        }
+        else
+        {
+            <p>ざんねん！来年もよろしくね！</p>
+        }
+    </div>
+}
+<br />
+<p>2025年もよろしくお願いします。by <a href="https://taiseiue.jp/">taiseiue </a></p>
