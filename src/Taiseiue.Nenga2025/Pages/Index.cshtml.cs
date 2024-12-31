@@ -7,6 +7,12 @@ public class IndexModel : PageModel
 {
     private readonly ILogger<IndexModel> _logger;
 
+    [BindProperty]
+    public int Group { get; set; }
+
+    [BindProperty]
+    public int Number { get; set; }
+
     public IndexModel(ILogger<IndexModel> logger)
     {
         _logger = logger;
@@ -15,5 +21,9 @@ public class IndexModel : PageModel
     public void OnGet()
     {
 
+    }
+    public void OnPost(string state)
+    {
+        Console.WriteLine(state);
     }
 }

@@ -5,6 +5,36 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1 class="display-4">あけおめ！</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<form method="post" action="">
+    <div class="mb-3">
+        <label for="inputPassword6" class="col-form-label">当選番号</label>
+        <div class="row g-3 align-items-center">
+            <div class="col-auto">
+                <select class="form-select" id="exampleInputEmail1" aria-label="Default select example"
+                    asp-for="@Model.Group">
+                    <option selected disabled>組</option>
+                    <option value="210">B0210組</option>
+                    <option value="238">B0238組</option>
+                    <option value="900">B0900組</option>
+                </select>
+            </div>
+            <div class="col-auto">
+                <input type="number" class="form-control" id="exampleFormControlInput1" min="100000" max="999999"
+                    asp-for="@Model.Number">
+            </div>
+        </div>
+        <div class="form-text">
+            年賀はがきの下部に書かれている組と6桁の番号を入力してください。
+        </div>
+    </div>
+    <button type="submit" name="state" class="btn btn-primary">確認</button>
+    <button type="reset" class="btn btn-secondary">リセット</button>
+</form>
+<hr />
+<h2>当選情報</h2>
+<p>組: @Model.Group 組</p>
+<p>@Model.Number 番</p>
