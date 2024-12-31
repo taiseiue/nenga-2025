@@ -31,10 +31,13 @@
             年賀はがきの下部に書かれている組と6桁の番号を入力してください。
         </div>
     </div>
-    <button type="submit" name="state" class="btn btn-primary">確認</button>
+    <button type="submit" class="btn btn-primary">確認</button>
     <button type="reset" class="btn btn-secondary">リセット</button>
 </form>
-<hr />
-<h2>当選情報</h2>
-<p>組: @Model.Group 組</p>
-<p>@Model.Number 番</p>
+@if (Model.WasPosted)
+{
+    <hr />
+    <h2>当選情報</h2>
+    <p>組: @Model.Group 組</p>
+    <p>@Model.Number 番</p>
+}

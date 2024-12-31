@@ -12,6 +12,7 @@ public class IndexModel : PageModel
 
     [BindProperty]
     public int Number { get; set; }
+    public bool WasPosted { get; set; }
 
     public IndexModel(ILogger<IndexModel> logger)
     {
@@ -20,10 +21,10 @@ public class IndexModel : PageModel
 
     public void OnGet()
     {
-
+        WasPosted = false;
     }
-    public void OnPost(string state)
+    public void OnPost()
     {
-        Console.WriteLine(state);
+        WasPosted = true;
     }
 }
