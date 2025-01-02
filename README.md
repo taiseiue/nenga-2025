@@ -3,6 +3,13 @@
 ## これは何
 2025年のお正月に年賀状に貼っておいたQRコードを読み取るとこのサイトに繋がるよ。あらかじめ出した年賀状を登録して、くじも登録しておくと年賀状を受け取った人が抽選番号を入力することでくじ引きできるよ。
 
+## 使っているもの
+
+- ASP.NET Core 8.0
+- Bootstrap
+- Docker Compose
+- Cloudflare Tunnel
+
 ## どうやって動かすの
 
 Docker composeで動きます。
@@ -85,3 +92,7 @@ CF_TUNNEL_TOKEN=<CF TUnnelのトークン>
 ```txt
 $ docker compose --profile up
 ```
+
+## ライセンス
+MITライセンスで公開します。詳しくは[LICENSE](./LICENSE)を参照のこと。
+何かあれば[@taiseiue](https://x.com/taiseiue)まで。
