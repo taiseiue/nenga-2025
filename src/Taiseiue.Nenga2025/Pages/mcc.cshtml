@@ -1,0 +1,36 @@
+﻿@page
+@model Taiseiue.Nenga2025.Pages.mccModel
+@{
+}
+
+<h1>年賀状2025 ミッションコントロール</h1>
+<hr />
+
+<h3>年賀状</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">名前</th>
+            <th scope="col">組</th>
+            <th scope="col">番号</th>
+            <th scope="col">開封日</th>
+            <th scope="col">くじ番号</th>
+            <th scope="col">メッセージ</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var card in Model.db.PostCards.OrderByDescending(c => c.OpenedAt ?? DateTime.MinValue))
+        {
+            <tr>
+                <th scope="row">@card.Id</th>
+                <td>@card.Name</td>
+                <td>@card.Group</td>
+                <td>@card.Number</td>
+                <td>@card.OpenedAt</td>
+                <td>@card.Lot</td>
+                <td>@card.Message</td>
+            </tr>
+        }
+    </tbody>
+</table>
