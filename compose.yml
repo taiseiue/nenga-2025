@@ -27,3 +27,5 @@ services:
       - run
     environment:
       - TUNNEL_TOKEN=${CF_TUNNEL_TOKEN}
+    profiles:
+      - public
