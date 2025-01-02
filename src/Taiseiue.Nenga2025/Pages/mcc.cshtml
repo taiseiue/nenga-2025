@@ -5,31 +5,64 @@
 
 <h1>年賀状2025 ミッションコントロール</h1>
 <hr />
-
+<h3>概要</h3>
+<p>年賀状: 開封済/総数: @Model.db.PostCards.Where(l => l.OpenedAt.HasValue).Count() / @Model.db.PostCards.Count()</p>
+<p>くじ: 残り/総数: @Model.db.Lots.Where(l => !l.OpenedAt.HasValue).Count() / @Model.db.Lots.Count()</p>
+<p>あたり: 残り/総数: @Model.db.Lots.Where(l => !l.OpenedAt.HasValue && l.GiftUrl != null).Count() / @Model.db.Lots.Where(l =>
+    l.GiftUrl != null).Count()</p>
+<hr />
 <h3>年賀状</h3>
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">#</th>
             <th scope="col">名前</th>
             <th scope="col">組</th>
             <th scope="col">番号</th>
             <th scope="col">開封日</th>
-            <th scope="col">くじ番号</th>
             <th scope="col">メッセージ</th>
+            <th scope="col">くじ</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var card in Model.db.PostCards.OrderByDescending(c => c.OpenedAt ?? DateTime.MinValue))
+        @foreach (var card in Model.db.PostCards.OrderBy(c => c.OpenedAt ?? DateTime.MaxValue))
         {
+            var lot = card.Lot.HasValue ? new Db().Lots.Where(l => l.Id == card.Lot).FirstOrDefault() : null;
             <tr>
-                <th scope="row">@card.Id</th>
-                <td>@card.Name</td>
+                <th scope="row">@card.Name</th>
                 <td>@card.Group</td>
                 <td>@card.Number</td>
                 <td>@card.OpenedAt</td>
-                <td>@card.Lot</td>
                 <td>@card.Message</td>
+                @if (lot != null)
+                {
+                    <td>@lot.Message</td>
+                }
+                else
+                {
+                    <td>未抽選</td>
+                }
+
+            </tr>
+        }
+    </tbody>
+</table>
+<hr />
+<h3>くじ</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">名前</th>
+            <th scope="col">開封日</th>
+            <th scope="col">Url</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var lot in Model.db.Lots.OrderBy(l => l.OpenedAt ?? DateTime.MaxValue))
+        {
+            <tr>
+                <th scope="row">@lot.Message</th>
+                <td>@lot.OpenedAt</td>
+                <td>@lot.GiftUrl</td>
             </tr>
         }
     </tbody>

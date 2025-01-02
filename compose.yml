@@ -13,6 +13,8 @@ services:
       ACCEPT_EULA: "Y"
       MSSQL_AGENT_ENABLED: "true"
       DB_NAME: "nenga"
+    ports:
+      - "1434:1433"
     volumes:
       - nenga-2025-db-data:/var/opt/mssql
       - ./backup:/backup

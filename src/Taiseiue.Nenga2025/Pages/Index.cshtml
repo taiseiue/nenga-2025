@@ -5,35 +5,30 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">あけましておめでとうございます</h1>
+    <p class="display-3">🐍</p>
+    <h1 class="display-5">あけましておめでとうございます</h1>
     <p>郵便はがきの下部番号を入力して、おみくじを引こう！</p>
-</div>
-
-<form method="post" action="">
-    <div class="mb-3">
-        <label for="inputPassword6" class="col-form-label">当選番号</label>
-        <div class="row g-3 align-items-center">
-            <div class="col-auto">
-                <select class="form-select" id="exampleInputEmail1" aria-label="Default select example"
-                    asp-for="@Model.Group">
-                    <option selected disabled>組</option>
+    <br />
+    <div class="m-5">
+        <form method="post" action="">
+            <div class="input-group mb-3">
+                <span class="input-group-text nenga-form-control">🎍</span>
+                <select class="form-select nenga-form-control" asp-for="@Model.Group">
+                    <option selected disabled>B0000組</option>
                     <option value="210">B0210組</option>
                     <option value="238">B0238組</option>
                     <option value="900">B0900組</option>
                 </select>
+                <span class="input-group-text btn-danger">令和7年 お年玉</span>
+                <input type="number" class="form-control nenga-form-control" min="100000" max="999999"
+                    placeholder="000000" asp-for="@Model.Number">
+                <span class="input-group-text nenga-form-control">🌅</span>
             </div>
-            <div class="col-auto">
-                <input type="number" class="form-control" id="exampleFormControlInput1" min="100000" max="999999"
-                    asp-for="@Model.Number">
-            </div>
-        </div>
-        <div class="form-text">
-            年賀はがきの下部に書かれている組と6桁の番号を入力してください。
-        </div>
+            <button type="submit" class="btn btn-primary">おみくじを引く</button>
+        </form>
     </div>
-    <button type="submit" class="btn btn-primary">くじを引く</button>
-    <button type="reset" class="btn btn-secondary">リセット</button>
-</form>
+</div>
+
 @if (Model.Error != null)
 {
     <hr />
@@ -44,23 +39,35 @@
 @if (Model.WasPosted && Model.PostCard != null && Model.Lot != null)
 {
     <hr />
-    <h2>あなたのハガキ</h2>
+    <h3>おみくじ結果</h3>
+    <br />
     <div class="container">
-    <h3>@Model.PostCard.Name 様</h3>
-    <p>B0 @Model.PostCard.Group 組 / @Model.PostCard.Number 番</p>
-    <hr />
-    <p>@Model.PostCard.Message</p>
-    <h4>おみくじ結果</h4>
-    <p>@Model.Lot.Message</p>
-    @if (Model.Lot.GiftUrl != null)
-        {
-            <a href="@Model.Lot.GiftUrl">おめでとう！あたり！ここをクリックしてね！</a>
-        }
-        else
-        {
-            <p>ざんねん！来年もよろしくね！</p>
-        }
+    <div class="card text-center">
+        <div class="card-header">
+            @Model.PostCard.Name 様
+        </div>
+        <div class="card-body">
+            <h3>@Model.Lot.Message</h3>
+            <figure class="text-center">
+                <blockquote class="blockquote">
+                    <p>@Model.PostCard.Message</p>
+                </blockquote>
+                <figcaption class="blockquote-footer">
+                    令和7年 元旦
+                </figcaption>
+            </figure>
+            @if (Model.Lot.GiftUrl != null)
+                {
+                    <a href="@Model.Lot.GiftUrl">おみくじの景品はこちら</a>
+                }
+            </div>
+            <div class="card-footer text-body-secondary">
+                B @Model.PostCard.Group.ToString("D4") 組 / @Model.PostCard.Number 番 /
+                @Model.PostCard.Id.ToString("D2")@Model.Lot.Id.ToString("D2")
+            </div>
+        </div>
     </div>
+
 }
 <br />
 <p>2025年もよろしくお願いします。by <a href="https://taiseiue.jp/">taiseiue </a></p>
